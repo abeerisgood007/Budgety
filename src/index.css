@@ -1,0 +1,97 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;9..144,900&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background-color: #0A0E1A;
+  color: #F5F1E8;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.font-display { font-family: 'Fraunces', Georgia, serif; }
+.font-mono-chess { font-family: 'JetBrains Mono', monospace; }
+
+/* Grain texture overlay */
+.grain {
+  position: relative;
+}
+.grain::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+}
+
+/* Smooth scroll snap for mobile pricing */
+.snap-x-cards {
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+.snap-x-cards > * {
+  scroll-snap-align: center;
+}
+
+/* Hide scrollbar on horizontal scrollers */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { scrollbar-width: none; }
+
+/* Page transition */
+.page-enter {
+  animation: pageEnter 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+@keyframes pageEnter {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Count-up shimmer */
+@keyframes countShimmer {
+  0% { opacity: 0.4; }
+  100% { opacity: 1; }
+}
+
+/* CTA glow follow */
+.cta-glow {
+  position: relative;
+  overflow: hidden;
+}
+.cta-glow::after {
+  content: '';
+  position: absolute;
+  width: 140px;
+  height: 140px;
+  background: radial-gradient(circle, rgba(232, 181, 71, 0.35), transparent 60%);
+  top: var(--y, 50%);
+  left: var(--x, 50%);
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.2s;
+  pointer-events: none;
+}
+.cta-glow:hover::after { opacity: 1; }
+
+/* Light mode */
+.light-mode {
+  background-color: #F5F1E8;
+  color: #0A0E1A;
+}
+.light-mode .bg-\[\#0A0E1A\] { background-color: #F5F1E8 !important; }
+.light-mode .bg-\[\#141929\] { background-color: #ffffff !important; }
+.light-mode .text-\[\#F5F1E8\] { color: #0A0E1A !important; }
+.light-mode .text-\[\#9CA3B8\] { color: #4B5563 !important; }
+.light-mode .border-\[\#1F2638\] { border-color: #E5E0D2 !important; }
+
+input, textarea, select {
+  font-size: 16px;
+}
